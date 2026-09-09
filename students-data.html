@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بيانات الموهوبات | ملف معلمة الموهوبات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#FAF6EC; --ivory-deep:#F1EADA;
+    --emerald-950:#0E2E24; --emerald-800:#153F31; --emerald-600:#1F5C46;
+    --gold:#AD8A47; --gold-soft:#D9C48C; --gold-pale:#EEE3C4;
+    --ink:#22201A; --ink-soft:#5C574A; --line:rgba(173,138,71,0.28);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; background:var(--ivory); color:var(--ink); font-family:'IBM Plex Sans Arabic', sans-serif; line-height:1.9;}
+  h1,h2,.display{font-family:'Amiri', serif; font-weight:700; margin:0;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:1080px; margin:0 auto; padding-inline:clamp(20px,5vw,48px);}
+
+  .topbar{
+    background:var(--emerald-950); color:var(--gold-pale);
+    padding:16px 0; font-size:0.92rem;
+  }
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between;}
+  .back-link{display:inline-flex; align-items:center; gap:8px; color:var(--gold-pale); transition:color .25s;}
+  .back-link:hover{color:#fff;}
+  .back-link svg{width:16px; height:16px;}
+
+  .page-hero{
+    background:radial-gradient(120% 160% at 50% -20%, var(--emerald-600), var(--emerald-950) 75%);
+    color:var(--ivory);
+    padding:clamp(56px,8vw,88px) 0 clamp(46px,6vw,64px);
+    text-align:center;
+  }
+  .page-hero .icon-badge{
+    width:72px; height:72px; margin:0 auto 22px;
+    border:1px solid rgba(217,196,140,0.4);
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    color:var(--gold-soft);
+  }
+  .page-hero .icon-badge svg{width:34px; height:34px;}
+  .page-hero h1{font-size:clamp(1.9rem,4.4vw,2.8rem);}
+  .page-hero p{margin-top:14px; color:var(--gold-pale); font-size:1.02rem; max-width:560px; margin-inline:auto;}
+  .divider-orn{display:flex; align-items:center; justify-content:center; gap:12px; color:var(--gold-soft); margin-top:22px;}
+  .divider-orn .l, .divider-orn .r{width:50px; height:1px; background:linear-gradient(90deg, transparent, var(--gold-soft));}
+  .divider-orn .r{background:linear-gradient(270deg, transparent, var(--gold-soft));}
+
+  main{padding:clamp(50px,7vw,80px) 0 clamp(70px,9vw,100px);}
+  .content-card{
+    background:var(--ivory-deep);
+    border:1px solid var(--line);
+    padding:clamp(30px,4vw,48px);
+  }
+  .content-card p{color:var(--ink-soft); font-size:1.02rem; margin:0 0 16px;}
+  .content-card p:last-child{margin-bottom:0;}
+  .status-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--gold-pale); color:var(--emerald-800);
+    font-size:0.82rem; font-weight:600;
+    padding:6px 14px; margin-bottom:22px;
+  }
+
+  .note-box{
+    background:var(--gold-pale); color:var(--emerald-800);
+    font-size:0.88rem; padding:12px 16px; margin-bottom:28px;
+    border-right:3px solid var(--gold);
+  }
+
+  /* stats */
+  .stat-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:30px; }
+  .stat-card{ background:var(--emerald-950); color:var(--ivory); padding:20px 14px; text-align:center; }
+  .stat-card .num{ font-family:'Amiri',serif; font-size:1.9rem; font-weight:700; color:var(--gold-soft); }
+  .stat-card .lbl{ font-size:0.82rem; color:rgba(250,246,236,0.8); margin-top:4px; }
+  @media (max-width:640px){ .stat-grid{grid-template-columns:1fr 1fr;} }
+
+  /* distribution */
+  .section-title{
+    font-size:1.1rem; color:var(--emerald-950);
+    margin:0 0 16px; padding-bottom:8px; border-bottom:1px solid var(--line);
+  }
+  .level-bars{ display:flex; flex-direction:column; gap:12px; margin-bottom:32px; }
+  .level-bar-row{ display:flex; align-items:center; gap:12px; }
+  .level-bar-row .lname{ width:92px; flex-shrink:0; font-size:0.9rem; color:var(--emerald-950); font-weight:600; }
+  .level-bar-track{ flex-grow:1; background:var(--ivory); height:22px; border:1px solid var(--line); overflow:hidden; }
+  .level-bar-fill{ height:100%; background:linear-gradient(90deg, var(--emerald-600), var(--emerald-950)); display:flex; align-items:center; padding-inline:8px; }
+  .level-bar-fill span{ color:var(--gold-pale); font-size:0.78rem; font-weight:600; }
+
+  .stack-bar{ display:flex; height:26px; width:100%; overflow:hidden; border:1px solid var(--line); margin-bottom:12px; }
+  .stack-seg.mawhoob{ background:var(--emerald-600); }
+  .stack-seg.waaid{ background:var(--gold); }
+  .stack-seg.pending{ background:var(--ivory-deep); border-inline:1px solid var(--line); }
+  .legend{ display:flex; flex-wrap:wrap; gap:16px; margin-bottom:32px; font-size:0.85rem; color:var(--ink-soft); }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend i{ width:11px; height:11px; display:inline-block; }
+  .legend .mawhoob{ background:var(--emerald-600); }
+  .legend .waaid{ background:var(--gold); }
+  .legend .pending{ background:var(--ivory-deep); border:1px solid var(--line); }
+
+  /* tabs */
+  .tabs{ display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+  .tab-btn{
+    background:var(--ivory); border:1px solid var(--line); color:var(--emerald-800);
+    font-family:'IBM Plex Sans Arabic',sans-serif; font-weight:600; font-size:0.92rem;
+    padding:9px 20px; cursor:pointer; transition:all .2s;
+  }
+  .tab-btn.active{ background:var(--emerald-950); color:var(--gold-pale); border-color:var(--emerald-950); }
+  .tab-panel{ display:none; }
+  .tab-panel.active{ display:block; }
+
+  .data-table-wrap{ overflow-x:auto; }
+  .data-table{ width:100%; border-collapse:collapse; min-width:480px; }
+  .data-table th{
+    background:var(--emerald-950); color:var(--gold-pale);
+    font-family:'Amiri',serif; font-size:0.95rem; padding:10px 12px; text-align:right;
+  }
+  .data-table td{ padding:10px 12px; font-size:0.9rem; color:var(--ink-soft); border-bottom:1px solid var(--line); }
+  .data-table td:first-child{ color:var(--ink); font-weight:600; }
+  .data-table tr:nth-child(even){ background:rgba(241,234,218,0.5); }
+  .badge{ display:inline-block; padding:2px 10px; font-size:0.78rem; font-weight:600; }
+  .badge.mawhoob{ background:var(--emerald-600); color:var(--ivory); }
+  .badge.waaid{ background:var(--gold-pale); color:var(--emerald-800); }
+  .badge.pending{ background:var(--ivory-deep); color:var(--ink-soft); border:1px solid var(--line); }
+  .badge.exceptional{ background:var(--gold); color:var(--emerald-950); font-weight:700; }
+
+  footer{background:var(--emerald-950); color:rgba(250,246,236,0.55); text-align:center; padding:26px 0; font-size:0.8rem;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      العودة للصفحة الرئيسية
+    </a>
+    <span>ملف معلمة الموهوبات</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16c0-1.7 1.3-3 3-3s3 1.3 3 3"/><path d="M14 9h4M14 13h4"/></svg></div>
+    <h1>بيانات الموهوبات</h1>
+    <p>سجل موثّق ببيانات الطالبات الموهوبات</p>
+    <div class="divider-orn" aria-hidden="true">
+      <span class="l"></span>
+      <svg width="12" height="12" viewBox="0 0 14 14"><path d="M7 0 L8.6 5.4 L14 7 L8.6 8.6 L7 14 L5.4 8.6 L0 7 L5.4 5.4 Z" fill="#D9C48C"/></svg>
+      <span class="r"></span>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="wrap">
+    <div class="content-card">
+
+      <div class="note-box">جميع الطالبات الموهوبات ومنسوبات المستوى الثاني والثالث اختبرن حاليًا المقياس الثاني، وسيُحدَّث إلى المقياس الثالث عند اختبار طالبات ثالث متوسط نهاية العام الدراسي.</div>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">53</div><div class="lbl">إجمالي الطالبات</div></div>
+        <div class="stat-card"><div class="num">44</div><div class="lbl">موهوبة</div></div>
+      </div>
+
+      <h3 class="section-title">توزيع الطالبات حسب الصف</h3>
+      <div class="level-bars">
+        <div class="level-bar-row">
+          <span class="lname">أول متوسط</span>
+          <div class="level-bar-track"><div class="level-bar-fill" style="width:48%"><span>13</span></div></div>
+        </div>
+        <div class="level-bar-row">
+          <span class="lname">ثاني متوسط</span>
+          <div class="level-bar-track"><div class="level-bar-fill" style="width:100%"><span>27</span></div></div>
+        </div>
+        <div class="level-bar-row">
+          <span class="lname">ثالث متوسط</span>
+          <div class="level-bar-track"><div class="level-bar-fill" style="width:48%"><span>13</span></div></div>
+        </div>
+      </div>
+
+      <h3 class="section-title">التصنيف العام</h3>
+      <div class="stack-bar">
+        <div class="stack-seg mawhoob" style="width:83%"></div>
+        <div class="stack-seg waaid" style="width:17%"></div>
+      </div>
+      <div class="legend">
+        <span><i class="mawhoob"></i> موهوبة (44)</span>
+        <span><i class="waaid"></i> واعدة بالموهبة (9)</span>
+      </div>
+
+      <h3 class="section-title">السجل التفصيلي</h3>
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="g1">أول متوسط (13)</button>
+        <button class="tab-btn" data-tab="g2">ثاني متوسط (27)</button>
+        <button class="tab-btn" data-tab="g3">ثالث متوسط (13)</button>
+      </div>
+
+      <div class="tab-panel active" id="g1">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <tr><th>#</th><th>الاسم</th><th>التصنيف</th><th>الدرجة</th></tr>
+            <tr><td>1</td><td>حور عبدالعزيز فلاح الشمري</td><td><span class="badge mawhoob">موهوب</span></td><td>1503</td></tr>
+            <tr><td>2</td><td>ترف بنت عاتق بن عيد النفيعي العتيبي</td><td><span class="badge mawhoob">موهوب</span></td><td>1504</td></tr>
+            <tr><td>3</td><td>وجدان بنت ياسر بن حزام المالكي</td><td><span class="badge mawhoob">موهوب</span></td><td>1509</td></tr>
+            <tr><td>4</td><td>روبين سليمان معتوق الطويرقي</td><td><span class="badge mawhoob">موهوب</span></td><td>1617</td></tr>
+            <tr><td>5</td><td>العنود عبدالرحمن سالم الشمري</td><td><span class="badge mawhoob">موهوب</span></td><td>1579</td></tr>
+            <tr><td>6</td><td>ياسمين علي عبدالرحمن آل حاجه</td><td><span class="badge mawhoob">موهوب</span></td><td>1493</td></tr>
+            <tr><td>7</td><td>ريتال عبدالعزيز مفرح الزهراني</td><td><span class="badge mawhoob">موهوب</span></td><td>1503</td></tr>
+            <tr><td>8</td><td>فاطمه يوسف صادق المسلم</td><td><span class="badge mawhoob">موهوب</span></td><td>1526</td></tr>
+            <tr><td>9</td><td>فرح عقيل اديهم الظفيري</td><td><span class="badge mawhoob">موهوب</span></td><td>1590</td></tr>
+            <tr><td>10</td><td>ديمه محمد حسن الغباري</td><td><span class="badge mawhoob">موهوب</span></td><td>1569</td></tr>
+            <tr><td>11</td><td>دانيه علي بن حسن بديوي</td><td><span class="badge mawhoob">موهوب</span></td><td>1600</td></tr>
+            <tr><td>12</td><td>المها بنت سعيد بن ظافر آل بحري اليامي</td><td><span class="badge mawhoob">موهوب</span></td><td>1593</td></tr>
+            <tr><td>13</td><td>بلقيس علي بن معتوق البوعلي</td><td><span class="badge mawhoob">موهوب</span></td><td>1622</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="g2">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <tr><th>#</th><th>الاسم</th><th>التصنيف</th><th>الدرجة</th></tr>
+            <tr><td>1</td><td>سدن ناصر احمد الزهراني</td><td><span class="badge mawhoob">موهوب</span></td><td>1505</td></tr>
+            <tr><td>2</td><td>جوان ايمن بن محمد القايدي</td><td><span class="badge mawhoob">موهوب</span></td><td>1539</td></tr>
+            <tr><td>3</td><td>وعد ماجد سعيد العتيبي</td><td><span class="badge mawhoob">موهوب</span></td><td>1554</td></tr>
+            <tr><td>4</td><td>فاطمة عبدالله محمد آل سوار</td><td><span class="badge mawhoob">موهوب</span></td><td>1541</td></tr>
+            <tr><td>5</td><td>أمل احمد متعب العنزي</td><td><span class="badge mawhoob">موهوب</span></td><td>1560</td></tr>
+            <tr><td>6</td><td>دانه عبدالله غانم الشهراني</td><td><span class="badge mawhoob">موهوب</span></td><td>1580</td></tr>
+            <tr><td>7</td><td>تمارا حسن بن عطيه الزهراني</td><td><span class="badge mawhoob">موهوب</span></td><td>1606</td></tr>
+            <tr><td>8</td><td>سارة بنت جوهر بن عبداللطيف العنبر</td><td><span class="badge mawhoob">موهوب</span></td><td>1644</td></tr>
+            <tr><td>9</td><td>ريم عبدالعزيز احمد المبيض</td><td><span class="badge mawhoob">موهوب</span></td><td>1618</td></tr>
+            <tr><td>10</td><td>سمو سعود خالد الحمالي</td><td><span class="badge mawhoob">موهوب</span></td><td>1565</td></tr>
+            <tr><td>11</td><td>رسيل سالم بن صالح آل كبيبه</td><td><span class="badge mawhoob">موهوب</span></td><td>1563</td></tr>
+            <tr><td>12</td><td>دانه منصور عبدالكريم الصنيع</td><td><span class="badge mawhoob">موهوب</span></td><td>1533</td></tr>
+            <tr><td>13</td><td>جنى بنت سليمان بن عبدالكريم بن عبدالرحمن أباحسين</td><td><span class="badge mawhoob">موهوب</span></td><td>1531</td></tr>
+            <tr><td>14</td><td>ندى ابراهيم بن محمد آل خرصان</td><td><span class="badge mawhoob">موهوب</span></td><td>1516</td></tr>
+            <tr><td>15</td><td>شيخه ماجد بن خالد السميح</td><td><span class="badge mawhoob">موهوب</span></td><td>1500</td></tr>
+            <tr><td>16</td><td>الماس وافي مفرح العنزي</td><td><span class="badge mawhoob">موهوب</span></td><td>1499</td></tr>
+            <tr><td>17</td><td>جوري سلطان مانع العنزي</td><td><span class="badge mawhoob">موهوب</span></td><td>1493</td></tr>
+            <tr><td>18</td><td>سدن محمد عبدالعزيز المحيمياء</td><td><span class="badge mawhoob">موهوب</span></td><td>1492</td></tr>
+            <tr><td>19</td><td>روز عبدالله بن حمد اللحيده</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1475</td></tr>
+            <tr><td>20</td><td>ليان مشاري صالح الكليب</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1466</td></tr>
+            <tr><td>21</td><td>رفيف محمد عبدالعزيز المحيمياء</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1456</td></tr>
+            <tr><td>22</td><td>ريتال عبدالله سعد الغامدي</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1443</td></tr>
+            <tr><td>23</td><td>مزون بنت سلطان بن محمد لسلوم</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1393</td></tr>
+            <tr><td>24</td><td>آية هاشم ابراهيم الحربي</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1393</td></tr>
+            <tr><td>25</td><td>حلا ذياب جمعان الغامدي</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1390</td></tr>
+            <tr><td>26</td><td>غلا ذياب جمعان الغامدي</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1386</td></tr>
+            <tr><td>27</td><td>موضي فهد مغيث النصار</td><td><span class="badge waaid">واعدة بالموهبة</span></td><td>1361</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="g3">
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <tr><th>#</th><th>الاسم</th><th>التصنيف</th><th>الدرجة</th></tr>
+            <tr><td>1</td><td>آيه علي حسين شيبان</td><td><span class="badge exceptional">موهبة استثنائية</span></td><td>—</td></tr>
+            <tr><td>2</td><td>سدن بنت حامد بن راشد الهوته</td><td><span class="badge mawhoob">موهوب</span></td><td>1597</td></tr>
+            <tr><td>3</td><td>شادن بدر محمد باسعد</td><td><span class="badge mawhoob">موهوب</span></td><td>1623</td></tr>
+            <tr><td>4</td><td>سحر بنت احمد بن مسفر الميموني</td><td><span class="badge mawhoob">موهوب</span></td><td>1599</td></tr>
+            <tr><td>5</td><td>بيان حسن محمد حقوي</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>6</td><td>رونق سفر علي الشهراني</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>7</td><td>ميار سعيد محمد الزهراني</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>8</td><td>تولين عبدالله بدر الحربي</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>9</td><td>تولين خالد عبدالباقي الجهني</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>10</td><td>خيال عادل جهاد الشمري</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>11</td><td>دانه ماجد أحمد الشمري</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>12</td><td>ميار عبدالله حسين العساف</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+            <tr><td>13</td><td>فاطمة حسن علي الراشد</td><td><span class="badge mawhoob">موهوب</span></td><td>—</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<footer>ملف معلمة الموهوبات — متوسطة أسماء بنت النعمان</footer>
+
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
